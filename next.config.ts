@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true, // Ensures paths end with `/`
   images: { unoptimized: true }, // Avoids Next.js image optimization
+  basePath: "/static", // Makes Next.js serve pages from `/static`
   headers: async () => {
     return [
       {
@@ -18,6 +19,15 @@ const nextConfig: NextConfig = {
             value: 'inline; filename="index.html"',
           },
         ],
+      },
+    ];
+  },
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/static", // Redirect root to `/static`
+        permanent: true,
       },
     ];
   },
